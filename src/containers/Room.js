@@ -26,10 +26,6 @@ class Room extends Component {
           searchTerm: ""
         }, () => console.log(this.state.votingQueue))
       );
-
-    console.log(this.state.searchTerm);
-    console.log(this.state.votingQueue);
-
   };
 
   addToPlaylist = queueItem => {
