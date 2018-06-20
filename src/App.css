@@ -2,6 +2,25 @@
   text-align: center;
 }
 
+.nav > a {
+  padding: 10px;
+}
+
+.home {
+  display: flex;
+  /* align-items: center; */
+  margin-left: 46.5%;
+  margin-top: 10%;
+}
+
+#host {
+  margin-right: 5px;
+}
+
+#join {
+  margin-left: 5px;
+}
+
 .overlay {
   position: absolute; /* Sit on top of the page content */
   border-color: rgb(172, 175, 177);

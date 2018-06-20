@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
+// import NowPlaying from './NowPlaying'
 import VotingRoom from './VotingRoom'
+import Home from '../components/Home'
+import { Route, Switch, Link, NavLink } from 'react-router-dom';
 
 class Room extends Component {
   state = {
@@ -61,14 +64,37 @@ class Room extends Component {
   render() {
     return (
       <div>
-        <VotingRoom
-          {...this.state}
-          updateSearchTerm={this.updateSearchTerm}
-          searchHandler={this.searchHandler}
-          handleResultClick={this.handleResultClick}
-          addToPlaylist={this.addToPlaylist}
-          removeVotingCard={this.removeVotingCard}
+        <div className="nav">
+          <Link to="/nowPlaying">Now Playing</Link>
+          <Link to="/votingBooth">Voting Booth</Link>
+        </div>
+
+        <Route
+            path="/"
+            exact
+            render={(props) => <Home {...props}
+              />}
+          />
+
+        <Route
+          path="/votingBooth"
+          exact
+          render={() => <VotingRoom
+            {...this.state}
+            updateSearchTerm={this.updateSearchTerm}
+            searchHandler={this.searchHandler}
+            handleResultClick={this.handleResultClick}
+            addToPlaylist={this.addToPlaylist}
+            removeVotingCard={this.removeVotingCard}
+          />}
         />
+
+      {/*<Route
+          path="/nowPlaying"
+          exact
+          render={() => <NowPlaying
+            />}
+        />*/}
       </div>
     );
   }
