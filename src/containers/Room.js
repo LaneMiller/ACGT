@@ -3,7 +3,7 @@ import VotingRoom from './VotingRoom'
 
 class Room extends Component {
   state = {
-    votingQueue: ["While my guitar gently weeps"],
+    votingQueue: [],
     playlist: [],
     searchTerm: ""
   };
@@ -22,9 +22,9 @@ class Room extends Component {
       .then(res => res.json())
       .then(json =>
         this.setState({
-          votingQueue: [...this.state.votingQueue, this.state.searchTerm],
+          votingQueue: [...this.state.votingQueue, ...json],
           searchTerm: ""
-        }, () => console.log(json))
+        }, () => console.log(this.state.votingQueue))
       );
 
     console.log(this.state.searchTerm);
