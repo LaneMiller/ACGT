@@ -5,7 +5,8 @@ class Room extends Component {
   state = {
     votingQueue: [],
     playlist: [],
-    searchTerm: ""
+    searchTerm: "",
+    searchResults: [],
   };
 
   updateSearchTerm = e => {
@@ -13,27 +14,38 @@ class Room extends Component {
       searchTerm: e.target.value
     })
   };
-
   searchHandler = e => {
     e.preventDefault();
+    this.fetchVideos()
+  };
 
-    fetch(`http://localhost:3003/api/v1/search/${this.state.searchTerm}`)
+  fetchVideos = () => {
+    //Always run rails server before React so that localhost port stays the same
+    fetch(`http://localhost:3000/api/v1/search/${this.state.searchTerm}`)
       .then(res => res.json())
       .then(json =>
         this.setState({
-          votingQueue: [...this.state.votingQueue, ...json],
-          searchTerm: ""
-        }, () => console.log(this.state.votingQueue))
+          searchResults: [...json],
+          searchTerm: "",
+        }, () => console.log(this.state.searchResults)  )
       );
-  };
+  }
+
+  handleResultClick = (mediaObj) => {
+    console.log(mediaObj.snippet.data.title);
+    this.setState({
+      votingQueue: [...this.state.votingQueue, mediaObj],
+      searchResults: [],
+    })
+  }
 
   addToPlaylist = queueItem => {
     this.setState(
       prevState => {
         const playlist = [...prevState.playlist, queueItem];
         return { playlist };
-      },
-      () => console.log(this.state.playlist)
+      }
+      , () => console.log("playlist:", this.state.playlist)
     );
   };
 
@@ -53,6 +65,7 @@ class Room extends Component {
           {...this.state}
           updateSearchTerm={this.updateSearchTerm}
           searchHandler={this.searchHandler}
+          handleResultClick={this.handleResultClick}
           addToPlaylist={this.addToPlaylist}
           removeVotingCard={this.removeVotingCard}
         />
