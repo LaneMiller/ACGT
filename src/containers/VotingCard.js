@@ -24,15 +24,15 @@ class VotingCard extends Component {
   unmountCard = () => {
     if (this.state.timer === 0) {
       if (this.state.upvotes > this.state.downvotes) {
-        this.props.addToPlaylist(this.props.mediaTitle)
-        this.props.removeVotingCard(this.props.mediaTitle)
+        this.props.addToPlaylist(this.props.mediaObj)
+        this.props.removeVotingCard(this.props.mediaObj)
       }
       else if (this.state.upvotes === this.state.downvotes) {
         this.setState( prevState => ({
           timer: prevState.timer + 20,
         }) )
       } else {
-        this.props.removeVotingCard(this.props.mediaTitle)
+        this.props.removeVotingCard(this.props.mediaObj)
       }
     }
   }
@@ -53,7 +53,7 @@ class VotingCard extends Component {
     const style = {border: '1px solid black', width: '20%', padding: '5px', display: 'inline-block', margin: '10px'}
     return (
       <div style={style}>
-        <Medium mediaTitle={this.props.mediaTitle}/>
+        <Medium mediaObj={this.props.mediaObj}/>
         <Polling {...this.state} handleVote={this.handleVote} />
       </div>
     )
