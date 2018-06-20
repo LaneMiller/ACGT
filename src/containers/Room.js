@@ -5,37 +5,51 @@ class Room extends Component {
   state = {
     votingQueue: ["While my guitar gently weeps"],
     playlist: [],
-    searchTerm: '',
-  }
+    searchTerm: ""
+  };
 
-  updateSearchTerm = (e) => {
+  updateSearchTerm = e => {
+    console.log(e.target.value);
     this.setState({
       searchTerm: e.target.value
     })
-  }
+  };
 
-  searchHandler = (e) => {
-    e.preventDefault()
-    //TEMP way to add to votingQueue
-    this.setState({
-      votingQueue: [...this.state.votingQueue, this.state.searchTerm],
-      searchTerm: '',
-    })
-  }
+  searchHandler = e => {
+    e.preventDefault();
 
-  addToPlaylist = (queueItem) => {
+    fetch(`http://localhost:3003/api/v1/search/${this.state.searchTerm}`)
+      .then(res => res.json())
+      .then(json =>
+        this.setState({
+          votingQueue: [...this.state.votingQueue, this.state.searchTerm],
+          searchTerm: ""
+        }, () => console.log(json))
+      );
+
+    console.log(this.state.searchTerm);
+    console.log(this.state.votingQueue);
+
+  };
+
+  addToPlaylist = queueItem => {
+    this.setState(
+      prevState => {
+        const playlist = [...prevState.playlist, queueItem];
+        return { playlist };
+      },
+      () => console.log(this.state.playlist)
+    );
+  };
+
+  removeVotingCard = queueItem => {
     this.setState(prevState => {
-      const playlist = [...prevState.playlist, queueItem]
-      return { playlist }
-    }, () => console.log(this.state.playlist) )
-  }
-
-  removeVotingCard = (queueItem) => {
-    this.setState(prevState => {
-      const votingQueue = prevState.votingQueue.filter(item => item !== queueItem)
-      return { votingQueue }
-    })
-  }
+      const votingQueue = prevState.votingQueue.filter(
+        item => item !== queueItem
+      );
+      return { votingQueue };
+    });
+  };
 
   render() {
     return (
@@ -48,7 +62,7 @@ class Room extends Component {
           removeVotingCard={this.removeVotingCard}
         />
       </div>
-    )
+    );
   }
 }
 
