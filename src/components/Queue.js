@@ -9,16 +9,16 @@ class Queue extends Component {
       return <VotingCard key={item}
         addToPlaylist={this.props.addToPlaylist}
         removeVotingCard={this.props.removeVotingCard}
-        mediaTitle={item}
+        mediaObj={item}
       />
     } )
   }
 
   render() {
-    // const votingCards = this.renderVotingCards()
+    const votingCards = this.renderVotingCards()
     return (
       <div style={{margin: '100px 10px', border: '1px solid black'}} >
-        {/*votingCards*/}
+        {votingCards}
       </div>
     )
   }

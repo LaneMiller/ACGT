@@ -5,7 +5,7 @@ class Medium extends Component {
     return (
       <div style={{border: "1px solid black"}}>
         <h3>Inside "Medium" Component</h3>
-        <h5>{this.props.mediaTitle}</h5>
+        <h5>{this.props.mediaObj.snippet.data.title}</h5>
       </div>
     )
   }

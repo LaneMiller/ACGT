@@ -9,7 +9,6 @@ class Room extends Component {
   };
 
   updateSearchTerm = e => {
-    console.log(e.target.value);
     this.setState({
       searchTerm: e.target.value
     })
