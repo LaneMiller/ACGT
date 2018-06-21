@@ -1,11 +1,18 @@
 import React, { Component } from 'react';
 
 class Medium extends Component {
+  shouldComponentUpdate() {
+    return false
+  }
+
   render() {
+    const { data } = this.props.mediaObj.snippet
+    console.log("mediaObj:", this.props.mediaObj);
     return (
-      <div style={{border: "1px solid black"}}>
-        <h3>Inside "Medium" Component</h3>
-        <h5>{this.props.mediaObj.snippet.data.title}</h5>
+      <div className="voting-medium" style={{border: "1px solid black"}}>
+        <img src={data.thumbnails.medium.url}
+          alt={data.title} />
+        <h5>{data.title}</h5>
       </div>
     )
   }

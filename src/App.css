@@ -2,27 +2,56 @@
   text-align: center;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+.nav > a {
+  padding: 10px;
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+.home {
+  display: flex;
+  /* align-items: center; */
+  margin-left: 46.5%;
+  margin-top: 10%;
 }
 
-.App-title {
-  font-size: 1.5em;
+#host {
+  margin-right: 5px;
 }
 
-.App-intro {
-  font-size: large;
+#join {
+  margin-left: 5px;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.overlay {
+  position: absolute; /* Sit on top of the page content */
+  border-color: rgb(172, 175, 177);
+  border-width: 10px;
+  border-style: ridge groove groove ridge;
+  border-radius: 10px;
+  width: 40%; /* Full width (cover the whole page) */
+  height: 75.5%; /* Full height (cover the whole page) */
+  top: 8em;
+  left: 28%;
+  background-color: rgb(200, 203, 204); /* Black background with opacity */
+  z-index: 999; /* Specify a stack order in case you're using a different order for other elements */
+  cursor: pointer; /* Add a pointer on hover */
+}
+
+.search-result-detail {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid black;
+  text-align: left;
+  word-wrap: normal;
+}
+
+.thumbnail {
+  margin-top: 7px;
+  margin-bottom: 5px;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+.voting-medium > img {
+  width: 80%;
+  height: auto;
 }

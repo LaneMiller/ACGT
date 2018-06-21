@@ -5,11 +5,11 @@ class Queue extends Component {
 
   renderVotingCards = () => {
     const { votingQueue } = this.props
-    return votingQueue.map( item => {
-      return <VotingCard key={item}
+    return votingQueue.map( mediaObj => {
+      return <VotingCard key={mediaObj.id}
         addToPlaylist={this.props.addToPlaylist}
         removeVotingCard={this.props.removeVotingCard}
-        mediaObj={item}
+        mediaObj={mediaObj}
       />
     } )
   }

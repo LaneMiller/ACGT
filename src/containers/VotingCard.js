@@ -27,9 +27,10 @@ class VotingCard extends Component {
         this.props.addToPlaylist(this.props.mediaObj)
         this.props.removeVotingCard(this.props.mediaObj)
       }
-      else if (this.state.upvotes === this.state.downvotes) {
+      else if (this.state.upvotes === this.state.downvotes && !this.state.revived) {
         this.setState( prevState => ({
-          timer: prevState.timer + 20,
+          timer: prevState.timer + 15,
+          revived: true,
         }) )
       } else {
         this.props.removeVotingCard(this.props.mediaObj)
@@ -50,7 +51,7 @@ class VotingCard extends Component {
   }
 
   render() {
-    const style = {border: '1px solid black', width: '20%', padding: '5px', display: 'inline-block', margin: '10px'}
+    const style = {border: '1px solid black', width: '15%', padding: '5px', display: 'inline-block'}
     return (
       <div style={style}>
         <Medium mediaObj={this.props.mediaObj}/>
