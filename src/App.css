@@ -3,7 +3,7 @@
 }
 
 .nav > a {
-  padding: 10px;
+  padding-right: 10px;
 }
 
 .home {
@@ -21,19 +21,38 @@
   margin-left: 5px;
 }
 
+#search {
+  margin-top: 65px;
+}
+
 .overlay {
   position: absolute; /* Sit on top of the page content */
   border-color: rgb(172, 175, 177);
   border-width: 10px;
   border-style: ridge groove groove ridge;
   border-radius: 10px;
-  width: 40%; /* Full width (cover the whole page) */
-  height: 75.5%; /* Full height (cover the whole page) */
+  width: 40%; 
+  height: 75.5%;
   top: 8em;
-  left: 28%;
-  background-color: rgb(200, 203, 204); /* Black background with opacity */
+  left: 29.8%;
+  background-color: rgb(200, 203, 204);
   z-index: 999; /* Specify a stack order in case you're using a different order for other elements */
   cursor: pointer; /* Add a pointer on hover */
+}
+
+.queue {
+  width: 98.6%;
+  margin: 100px 10px;
+  border: 1px solid black;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.voting-card {
+  border: 1px solid black;
+   width: 15%;
+   padding: 5px;
+   display: inline-block;
 }
 
 .search-result-detail {

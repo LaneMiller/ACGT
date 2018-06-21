@@ -35,11 +35,18 @@ class Room extends Component {
   }
 
   handleResultClick = (mediaObj) => {
-    console.log(mediaObj.snippet.data.title);
-    this.setState({
-      votingQueue: [...this.state.votingQueue, mediaObj],
-      searchResults: [],
-    })
+    const duplicates = this.state.votingQueue.filter(obj => obj.id === mediaObj.id)
+    if (duplicates.length === 0) {
+      this.setState({
+        votingQueue: [...this.state.votingQueue, mediaObj],
+        searchResults: [],
+      })
+    } else {
+      alert("This video is already in the queue!")
+      this.setState({
+        searchResults: [],
+      })
+    }
   }
 
   addToPlaylist = queueItem => {
@@ -77,11 +84,10 @@ class Room extends Component {
         </div>
 
         <Route
-            path="/"
-            exact
-            render={(props) => <Home {...props}
-              />}
-          />
+          path="/"
+          exact
+          render={(props) => <Home {...props} />}
+        />
 
         <Route
           path="/votingBooth"
@@ -95,17 +101,15 @@ class Room extends Component {
             removeVotingCard={this.removeVotingCard}
           />}
         />
-        <NowPlaying 
-          playlist={this.state.playlist} 
-          onPlayerStateChange={this.onPlayerStateChange} 
-        />
 
-      {/*<Route
+        <Route
           path="/nowPlaying"
           exact
           render={() => <NowPlaying
-            />}
-        />*/}
+            playlist={this.state.playlist}
+            onPlayerStateChange={this.onPlayerStateChange}
+          />}
+        />
       </div>
     );
   }

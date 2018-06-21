@@ -51,9 +51,8 @@ class VotingCard extends Component {
   }
 
   render() {
-    const style = {border: '1px solid black', width: '15%', padding: '5px', display: 'inline-block'}
     return (
-      <div style={style}>
+      <div className="voting-card">
         <Medium mediaObj={this.props.mediaObj}/>
         <Polling {...this.state} handleVote={this.handleVote} />
       </div>
