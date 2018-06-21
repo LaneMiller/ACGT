@@ -14,7 +14,7 @@ class VotingRoom extends Component {
   render() {
     const searchResults = this.renderSearchResults()
     return (
-      <div>
+      <div className="voting-room">
         <Search term={this.props.searchTerm}
           updateSearchTerm={this.props.updateSearchTerm}
           searchHandler={this.props.searchHandler} />
