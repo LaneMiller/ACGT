@@ -7,9 +7,9 @@ class NowPlaying extends Component {
     return (
       <div>
         <Playlist playlist={this.props.playlist} />
-        <MediaWindow 
-          playlist={this.props.playlist} 
-          onPlayerStateChange={this.props.onPlayerStateChange}
+        <MediaWindow
+          playlist={this.props.playlist}
+          updatePlaylist={this.props.updatePlaylist}
         />
       </div>
     )
