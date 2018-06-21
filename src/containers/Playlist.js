@@ -4,12 +4,12 @@ import React, { Component } from 'react';
 class Playlist extends Component {
   render() {
     // const playlist = this.props.playlist.map((song) =>
-    //   <MediaWindow song={song} key={song.id} />
+    //   <MediaWindow song={song} key={songid} />
     // );
 
     return (
       <ul>
-        {this.props.playlist.map((song) => 
+        {this.props.playlist.map((song) =>
           <li key={song.id} id={song.id} >
             <img src={song.snippet.data.thumbnails.default.url} alt={song.id}></img>
             {song.snippet.data.title}
