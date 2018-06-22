@@ -9,10 +9,11 @@ class MediaWindow extends Component {
 
   renderMediaComponent = () => {
     const opts = {
-      height: '390',
-      width: '640',
+      height: '440',
+      width: '720',
       playerVars: { // https://developers.google.com/youtube/player_parameters
-        autoplay: 1
+        autoplay: 1,
+        iv_load_policy: 3,
       }
     };
 
@@ -23,7 +24,7 @@ class MediaWindow extends Component {
         onEnd={this.props.updatePlaylist}
       />
     } else {
-      return <h5>You don't have any videos in your playlist. Go add some!</h5>
+      null
     }
   }
 
@@ -31,7 +32,7 @@ class MediaWindow extends Component {
     const media = this.renderMediaComponent()
 
     return (
-      <div>
+      <div className="media-window">
         {media}
       </div>
     );

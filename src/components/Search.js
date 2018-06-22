@@ -4,7 +4,7 @@ const Search = (props) => {
   return (
     <form id="search" onSubmit={props.searchHandler}>
       <input type='text' value={props.term}
-        onChange={props.updateSearchTerm} placeholder="Add something good!" />
+        onChange={props.updateSearchTerm} placeholder="Media Search" />
       <button type='submit'>Search</button>
     </form>
   )

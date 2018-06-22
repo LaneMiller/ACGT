@@ -6,7 +6,7 @@ class NowPlaying extends Component {
   render() {
     const view = this.props.view ? 'block' : 'none'
     return (
-      <div className='now-playing' style={{ display: view }}>
+      <div className='now-playing' id="now-playing" style={{ display: view }}>
         <Playlist playlist={this.props.playlist} />
         <MediaWindow
           playlist={this.props.playlist}

@@ -1,9 +1,20 @@
 .App {
   text-align: center;
+  background-color: hsla(259, 86%, 5%, 93%);
 }
 
-.nav > a {
+.icon {
+  margin-right: 5.2px;
+}
+
+.nav > a > h3 {
+  font-family: 'Chango', cursive;
+  color: rgba(255, 228, 10, 0.93);
+  /* text-shadow: -1px -1px black, 1px -1px black, -1px 1px black, 1px 1px black; */
+  display: inline-block;
+  padding-left: 10px;
   padding-right: 10px;
+  cursor: pointer;
 }
 
 .home {
@@ -25,15 +36,56 @@
   position: absolute; /* Sit on top of the page content */
   width: 100%;
   height: 100%;
-  top: 19px;
+  top: 137px;
   left: 0;
-  background-color: white;
+  /* background-color: white; */
   z-index: 999; /* Specify a stack order in case you're using a different order for other elements */
   cursor: pointer;
+
+  background-image: url('./astro.jpg');
+  background-size: cover;
+  border-top: groove;
+  border-color: hsla(16, 70%, 58%, 0.85);
+  border-width: 1px;
+
+}
+
+.playlist-list {
+  margin-right: 8%;
+  float: right;
+  color: white;
+}
+
+.playlist-list > h4 {
+  width: 10em;
+  word-wrap: normal;
+  margin-top: 1px;
+  margin-bottom: 20px;
+}
+
+.media-window {
+  position: fixed;
+  margin-left: 25%;
+  margin-top: 2%;
+  color: white;
 }
 
 #search {
+  margin-right: 6px;
+}
+
+#search > input {
   margin-top: 65px;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+#search > button {
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border-width: 2px;
+  padding-bottom: 1px;
+  border-style: inset;
 }
 
 .overlay {
@@ -43,27 +95,48 @@
   border-style: ridge groove groove ridge;
   border-radius: 10px;
   width: 40%;
-  height: 75.5%;
-  top: 8em;
+  height: 50%;
+  overflow-x: scroll;
+  top: 18em;
   left: 29.8%;
   background-color: rgb(200, 203, 204);
   z-index: 500; /* Specify a stack order in case you're using a different order for other elements */
   cursor: pointer; /* Add a pointer on hover */
 }
 
-.queue {
-  width: 98.6%;
+.ui.cards {
   margin: 100px 10px;
-  border: 1px solid black;
-  overflow-x: auto;
-  white-space: nowrap;
+  /* overflow-x: scroll; */
+  /* white-space: nowrap; */
+  max-height: 25em;
+
+  margin-left: 15px;
+  margin-top: 40px;
+  flex-wrap: nowrap;
+}
+
+.content {
+  white-space: normal;
+}
+
+.queue {
+  height: 35em;
+}
+
+.voting-room {
+  background-image: url('http://getwallpapers.com/wallpaper/full/4/d/f/78034.jpg');
+  background-size: cover;
+  border-top: groove;
+  border-color: hsla(16, 70%, 58%, 0.85);
+  border-width: 1px;
+  margin-top: 0px;
 }
 
 .voting-card {
   border: 1px solid black;
-   width: 15%;
-   padding: 5px;
-   display: inline-block;
+  width: 15%;
+  padding: 5px;
+  display: inline-block;
 }
 
 .search-result-detail {
@@ -71,6 +144,10 @@
   align-items: center;
   border-bottom: 1px solid black;
   text-align: left;
+  word-wrap: normal;
+}
+
+.result-title {
   word-wrap: normal;
 }
 

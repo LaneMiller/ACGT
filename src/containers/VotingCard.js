@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import Medium from '../components/Medium'
 import Polling from '../components/Polling'
+import { Card, Icon, Image } from 'semantic-ui-react'
 
 class VotingCard extends Component {
   state = {
     upvotes: 0,
     downvotes: 0,
-    timer: 6,
+    timer: 45,
   }
 
   componentDidMount() {
@@ -50,14 +51,32 @@ class VotingCard extends Component {
     })                                // this.state.upvotes or this.state.downvotes
   }
 
-  render() {
+  renderCard = () => {
     return (
-      <div className="voting-card">
-        <Medium mediaObj={this.props.mediaObj}/>
-        <Polling {...this.state} handleVote={this.handleVote} />
-      </div>
+      <Card>
+        <Image src={this.props.mediaObj.snippet.data.thumbnails.medium.url} />
+        <Card.Content>
+          <Card.Header>{this.props.mediaObj.snippet.data.title}</Card.Header>
+          <Polling {...this.state} handleVote={this.handleVote} />
+        </Card.Content>
+      </Card>
+    )
+  }
+
+  render() {
+    const card = this.renderCard()
+    return (
+      <React.Fragment>
+        {card}
+      </React.Fragment>
     )
   }
 }
+
+//<div className="voting-card">
+//   <Medium mediaObj={this.props.mediaObj}/>
+//   <Polling {...this.state} handleVote={this.handleVote} />
+// </div>
+
 
 export default VotingCard;

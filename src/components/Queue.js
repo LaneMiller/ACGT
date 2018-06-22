@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import VotingCard from '../containers/VotingCard'
+import { Card } from 'semantic-ui-react'
 
 class Queue extends Component {
 
@@ -18,7 +19,9 @@ class Queue extends Component {
     const votingCards = this.renderVotingCards()
     return (
       <div className="queue">
-        {votingCards}
+        <Card.Group>
+          {votingCards}
+        </Card.Group>
       </div>
     )
   }

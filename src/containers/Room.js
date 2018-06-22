@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import iconLrg from '../acgt logo.jpg'
+import iconSml from '../acgt-logo-small.png'
 import VotingRoom from './VotingRoom'
 import NowPlaying from "./NowPlaying";
 import Home from '../components/Home'
@@ -113,20 +115,17 @@ class Room extends Component {
 
     return (
       <div>
+        {/*<img className="icon" src={iconLrg} />*/}
+        <img className="icon" src={iconSml} />
         <div className="nav">
-          <a onClick={showNowPlaying}>Now Playing</a>
-          <Link to="/votingBooth" onClick={hideNowPlaying}>Voting Booth</Link>
+          <a onClick={showNowPlaying}><h3>Now Playing</h3></a>
+          <Link to="/votingBooth" onClick={hideNowPlaying}><h3>Voting Booth</h3></Link>
         </div>
+
+
 
         <Route
           path="/"
-          exact
-          render={(props) => <Home {...props} />}
-        />
-
-        <Route
-          path="/votingBooth"
-          exact
           render={() => (
             <div>
               <NowPlaying
@@ -149,5 +148,11 @@ class Room extends Component {
     );
   }
 }
+
+// <Route
+//   path="/"
+//   exact
+//   render={(props) => <Home {...props} />}
+// />
 
 export default Room;

@@ -2,19 +2,32 @@ import React, { Component } from 'react';
 // import MediaWindow from "../components/MediaWindow";
 
 class Playlist extends Component {
+  renderPlaylist = () => {
+    console.log(this.props.playlist);
+    if (this.props.playlist.length > 0) {
+      return this.props.playlist.map((song) =>
+        <React.Fragment>
+          <img src={song.snippet.data.thumbnails.default.url} alt={song.id}></img>
+          <h4 key={song.id} id={song.id} >
+            {song.snippet.data.title}
+          </h4>
+        </React.Fragment>
+      )
+    } else {
+      return <h3>You don't have any videos in your playlist. Go add some!</h3>
+    }
+  }
+
   render() {
     // const playlist = this.props.playlist.map((song) =>
     //   <MediaWindow song={song} key={songid} />
     // );
+    const playlist = this.renderPlaylist()
 
     return (
-      <ul>
-        {this.props.playlist.map((song) =>
-          <li key={song.id} id={song.id} >
-            <img src={song.snippet.data.thumbnails.default.url} alt={song.id}></img>
-            {song.snippet.data.title}
-          </li>
-        )}
+      <ul className="playlist-list">
+        <h3>Up Next:</h3>
+        {playlist}
       </ul>
     );
   }
