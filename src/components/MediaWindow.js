@@ -19,7 +19,7 @@ class MediaWindow extends Component {
 
     if (this.props.playlist.length > 0) {
       return <YouTube
-        videoId={this.props.playlist[0].id}
+        videoId={this.props.playlist[0].videoId}
         opts={opts}
         onEnd={this.props.updatePlaylist}
       />

@@ -7,7 +7,7 @@ class VotingCard extends Component {
   state = {
     upvotes: 0,
     downvotes: 0,
-    timer: 10,
+    timer: 4,
   }
 
   componentDidMount() {
@@ -25,8 +25,8 @@ class VotingCard extends Component {
   unmountCard = () => {
     if (this.state.timer === 0) {
       if (this.state.upvotes > this.state.downvotes) {
-        this.props.addToPlaylist(this.props.mediaObj)
-        this.props.removeVotingCard(this.props.mediaObj)
+        this.props.addToPlaylist(this.props.video)
+        this.props.removeVotingCard(this.props.video)
       }
       else if (this.state.upvotes === this.state.downvotes && !this.state.revived) {
         this.setState( prevState => ({
@@ -34,7 +34,7 @@ class VotingCard extends Component {
           revived: true,
         }) )
       } else {
-        this.props.removeVotingCard(this.props.mediaObj)
+        this.props.removeVotingCard(this.props.video)
       }
     }
   }
@@ -44,19 +44,21 @@ class VotingCard extends Component {
   }
 
   handleVote = (e) => {
-    const vote = e.target.name //vote will either equal 'upvotes' or 'downvotes'
+    const vote = e.target.name
+    //vote will either equal 'upvotes' or 'downvotes'
 
     this.setState( prevState => {
-      return {[vote]: prevState[vote] + 1} //this increments the prevState of either
-    })                                // this.state.upvotes or this.state.downvotes
+      return {[vote]: prevState[vote] + 1}
+      //increments the prevState of either this.state.upvotes or this.state.downvotes
+    })
   }
 
   renderCard = () => {
     return (
       <Card>
-        <Image src={this.props.mediaObj.snippet.data.thumbnails.medium.url} />
+        <Image src={this.props.video.mediumThumb} />
         <Card.Content>
-          <Card.Header>{this.props.mediaObj.snippet.data.title}</Card.Header>
+          <Card.Header>{this.props.videotitle}</Card.Header>
           <Polling {...this.state} handleVote={this.handleVote} />
         </Card.Content>
       </Card>
@@ -74,7 +76,7 @@ class VotingCard extends Component {
 }
 
 //<div className="voting-card">
-//   <Medium mediaObj={this.props.mediaObj}/>
+//   <Medium video={this.props.video}/>
 //   <Polling {...this.state} handleVote={this.handleVote} />
 // </div>
 

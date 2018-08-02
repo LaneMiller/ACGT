@@ -6,11 +6,11 @@ class Queue extends Component {
 
   renderVotingCards = () => {
     const { votingQueue } = this.props
-    return votingQueue.map( mediaObj => {
-      return <VotingCard key={mediaObj.id}
+    return votingQueue.map( video => {
+      return <VotingCard key={video.videoId}
         addToPlaylist={this.props.addToPlaylist}
         removeVotingCard={this.props.removeVotingCard}
-        mediaObj={mediaObj}
+        video={video}
       />
     } )
   }

@@ -3,14 +3,14 @@ import React, { Component } from 'react';
 
 class Playlist extends Component {
   renderPlaylist = () => {
-    console.log(this.props.playlist);
     if (this.props.playlist.length > 0) {
       const upNext = [...this.props.playlist].slice(1)
+
       return upNext.map((song) =>
         <React.Fragment>
-          <img src={song.snippet.data.thumbnails.default.url} alt={song.id}></img>
+          <img src={song.defaultThumb} alt={song.videoId}></img>
           <h4 key={song.id} id={song.id} >
-            {song.snippet.data.title}
+            {song.title}
           </h4>
         </React.Fragment>
       )

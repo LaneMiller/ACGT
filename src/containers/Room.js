@@ -9,11 +9,28 @@ import { Route, Switch, Link, NavLink } from 'react-router-dom';
 class Room extends Component {
   state = {
     votingQueue: [],
+    playlistId: 1,
     playlist: [],
     searchTerm: "",
     searchResults: [],
     showNowPlaying: false,
   };
+
+  componentDidMount() {
+    return fetch(`http://localhost:3000/api/v1/playlists/${this.state.playlistId}`).then(res => res.json()).then(this.setInitialPlaylist)
+  }
+
+  setInitialPlaylist = (playlistData) => {
+    if (playlistData.media.length > 0) {
+      const videos = playlistData.media.map(video => {
+        const { id, video_id, title, default_thumb, medium_thumb, liveBroadcastContent } = video;
+
+        return {id, videoId: video_id, title, defaultThumb: default_thumb, mediumThumb: medium_thumb, liveBroadcastContent}
+      })
+
+      this.setState({ playlist: videos })
+    }
+  }
 
   updateSearchTerm = e => {
     this.setState({
@@ -38,10 +55,14 @@ class Room extends Component {
   }
 
   handleResultClick = (mediaObj) => {
-    const duplicates = this.state.votingQueue.filter(obj => obj.id === mediaObj.id)
+    const { title, thumbnails, liveBroadcastContent } = mediaObj.snippet.data;
+
+    const video = {videoId: mediaObj.id, title, defaultThumb: thumbnails.default.url, mediumThumb: thumbnails.medium.url, liveBroadcastContent}
+
+    const duplicates = this.state.votingQueue.filter(obj => obj.videoId === video.videoId)
     if (duplicates.length === 0) {
       this.setState({
-        votingQueue: [...this.state.votingQueue, mediaObj],
+        votingQueue: [...this.state.votingQueue, video],
         searchResults: [],
       })
     } else {
@@ -52,21 +73,13 @@ class Room extends Component {
     }
   }
 
-  addToPlaylist = queueItem => {
-    // const mediaParams = {video_id: queueItem.id, snippet:{data:{title: queueItem.snippet.data.title, thumbnails:{default:{url: queueItem.snippet.data.thumbnails.default.url}, medium:{url: queueItem.snippet.data.thumbnails.medium.url}}, liveBroadcastContent: queueItem.snippet.data.liveBroadcastContent}}}
-    const { title, thumbnails, liveBroadcastContent } = queueItem.snippet.data;
+  addToPlaylist = video => {
+    const { videoId, title, defaultThumb, mediumThumb, liveBroadcastContent } = video;
+    const mediaParams = {video_id: videoId, title, default_thumb: defaultThumb, medium_thumb: mediumThumb, liveBroadcastContent, playlist_id: this.state.playlistId}
 
-    const mediaParams = {video_id: queueItem.id, title: title, default: thumbnails.default.url, medium: thumbnails.medium.url, liveBroadcastContent}
+    const setPlaylistState = (json) => {this.setPlaylistState(video, json)}
 
-    this.setState(
-      prevState => {
-        const playlist = [...prevState.playlist, queueItem]
-        return { playlist }
-      }
-      , () => console.log("playlist:", this.state.playlist)
-    )
-
-    // this.persistMedium(mediaParams)
+    this.persistMedium(mediaParams).then(setPlaylistState)
   };
 
   persistMedium = (mediaParams) => {
@@ -77,13 +90,24 @@ class Room extends Component {
       },
       body: JSON.stringify(mediaParams)
     }
-    return fetch('http://localhost:3000/api/v1/media', postConfig).then(res => res.json()).then(json => ({id: json.id, video_id: json.video_id, snippet:{data:{title: json.title, thumbnails:{default:{url: json.default}, medium:{url: json.medium}}, liveBroadcastContent: json.liveBroadcastContent}}}))
+
+    return fetch('http://localhost:3000/api/v1/media', postConfig).then(res => res.json())
   }
 
-  removeVotingCard = queueItem => {
+  setPlaylistState = (video, json) => {
+    this.setState(
+      prevState => {
+        const playlist = [...prevState.playlist, {...video, id: json.id}]
+        return { playlist }
+      }
+      , () => console.log("playlist:", this.state.playlist)
+    )
+  }
+
+  removeVotingCard = video => {
     this.setState(prevState => {
       const votingQueue = prevState.votingQueue.filter(
-        item => item !== queueItem
+        item => item !== video
       );
       return { votingQueue };
     });
@@ -95,8 +119,8 @@ class Room extends Component {
     this.setState({
       playlist: newPlaylist
     })
-    console.log(removedSong.id);
-    // this.unpersistMedium(removedSong.id)
+
+    this.unpersistMedium(removedSong.id)
   }
 
   unpersistMedium = (id) => {
