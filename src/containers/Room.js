@@ -38,8 +38,6 @@ class Room extends Component {
   }
 
   handleResultClick = (mediaObj) => {
-    console.log("this one", mediaObj)
-    console.log("this one too", this.state.votingQueue[0]);
     const duplicates = this.state.votingQueue.filter(obj => obj.id === mediaObj.id)
     if (duplicates.length === 0) {
       this.setState({
@@ -56,8 +54,9 @@ class Room extends Component {
 
   addToPlaylist = queueItem => {
     // const mediaParams = {video_id: queueItem.id, snippet:{data:{title: queueItem.snippet.data.title, thumbnails:{default:{url: queueItem.snippet.data.thumbnails.default.url}, medium:{url: queueItem.snippet.data.thumbnails.medium.url}}, liveBroadcastContent: queueItem.snippet.data.liveBroadcastContent}}}
+    const { title, thumbnails, liveBroadcastContent } = queueItem.snippet.data;
 
-    const mediaParams = {video_id: queueItem.id, title: queueItem.snippet.data.title, default: queueItem.snippet.data.thumbnails.default.url, medium: queueItem.snippet.data.thumbnails.medium.url, liveBroadcastContent: queueItem.snippet.data.liveBroadcastContent}
+    const mediaParams = {video_id: queueItem.id, title: title, default: thumbnails.default.url, medium: thumbnails.medium.url, liveBroadcastContent}
 
     this.setState(
       prevState => {
@@ -101,7 +100,7 @@ class Room extends Component {
   }
 
   unpersistMedium = (id) => {
-    fetch('http://localhost:3000/api/v1/media/', {method: 'DELETE'} )
+    fetch(`http://localhost:3000/api/v1/media/${id}`, {method: 'DELETE'} )
   }
 
   render() {

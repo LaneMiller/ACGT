@@ -5,7 +5,8 @@ class Playlist extends Component {
   renderPlaylist = () => {
     console.log(this.props.playlist);
     if (this.props.playlist.length > 0) {
-      return this.props.playlist.map((song) =>
+      const upNext = [...this.props.playlist].slice(1)
+      return upNext.map((song) =>
         <React.Fragment>
           <img src={song.snippet.data.thumbnails.default.url} alt={song.id}></img>
           <h4 key={song.id} id={song.id} >

@@ -108,7 +108,7 @@
   margin: 100px 10px;
   /* overflow-x: scroll; */
   /* white-space: nowrap; */
-  max-height: 25em;
+  height: 26em;
 
   margin-left: 15px;
   margin-top: 40px;
@@ -131,7 +131,7 @@
   border-width: 1px;
   margin-top: 0px;
 }
-
+/* No longer in use */
 .voting-card {
   border: 1px solid black;
   width: 15%;

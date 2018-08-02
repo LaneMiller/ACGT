@@ -7,7 +7,7 @@ class VotingCard extends Component {
   state = {
     upvotes: 0,
     downvotes: 0,
-    timer: 45,
+    timer: 10,
   }
 
   componentDidMount() {
