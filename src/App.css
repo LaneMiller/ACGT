@@ -35,9 +35,9 @@
 .now-playing {
   position: absolute; /* Sit on top of the page content */
   width: 100%;
-  height: 100%;
+  height: 65%;
   top: 137px;
-  left: 0;
+  left: 0%;
   /* background-color: white; */
   z-index: 999; /* Specify a stack order in case you're using a different order for other elements */
   cursor: pointer;
@@ -124,7 +124,7 @@
 }
 
 .voting-room {
-  background-image: url('http://getwallpapers.com/wallpaper/full/4/d/f/78034.jpg');
+  background-image: url('./astro.jpg');
   background-size: cover;
   border-top: groove;
   border-color: hsla(16, 70%, 58%, 0.85);

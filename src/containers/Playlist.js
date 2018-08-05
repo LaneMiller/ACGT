@@ -9,7 +9,7 @@ class Playlist extends Component {
       return upNext.map((song) =>
         <React.Fragment>
           <img src={song.defaultThumb} alt={song.videoId}></img>
-          <h4 key={song.id} id={song.id} >
+          <h4 key={song.videoId} id={song.videoId} >
             {song.title}
           </h4>
         </React.Fragment>
